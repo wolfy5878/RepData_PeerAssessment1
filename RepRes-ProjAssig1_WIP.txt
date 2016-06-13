@@ -1,31 +1,21 @@
 ##Download Data from web and create working directory
-if(!file.exists("AMD")){dir.create("AMD")}
-setwd("./AMD")
-fileurl <- "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip"
- 
- ####combine each of these into single respective multistep functions for each if statement
- 
-if(!file.exists("./repdata-data-activity.zip")){     
+if(!file.exists("AMD")){dir.create("AMD")
+	setwd("./AMD")
+	fileurl <- "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip"
+	if(!file.exists("./repdata-data-activity.zip")){     
 		download.file(fileurl, destfile="./repdata-data-activity.zip")}
-		
-if (!file.exists("./activity.csv")){
+	if (!file.exists("./activity.csv")){
 		unzip("./repdata-data-activity.zip", exdir = ".")}
-		
-## Load and pre-process the Data 
-data <- read.csv("./activity.csv")
+## Load and pre-process the Data
+	data <- read.csv("./activity.csv")}
 
 ##What is mean total number of steps taken per day?
-stepsSums <- aggregate(steps~date,data=data,sum)
-	####can aggregate also transform variable types into correct ones for hist?
+stepsData <- aggregate(steps~date,data=data,sum)
+png(file="DailySteps.png")
+hist(stepsData$steps,col="red",main="Steps Per Day",xlab="Total Number of Steps Taken Per Day")
+dev.off()
+
 --------------------------------------------------------
 
-
-
-##create 
-hist(data$Global_active_power,col="red",main="Global Active Power",xlab="Global Active Power (kilowatts)")
-##Create PNG file plot1
-png(file="plot1.png")
-hist(data$Global_active_power,col="red",main="Global Active Power",xlab="Global Active Power (kilowatts)")
-dev.off()
 ##Return back to previous working directory to reset user to original location
 setwd("..")
