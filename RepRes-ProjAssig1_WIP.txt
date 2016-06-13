@@ -9,11 +9,16 @@ if(!file.exists("AMD")){dir.create("AMD")
 ## Load and pre-process the Data
 	data <- read.csv("./activity.csv")}
 
-##What is mean total number of steps taken per day?
-stepsData <- aggregate(steps~date,data=data,sum)
-png(file="DailySteps.png")
-hist(stepsData$steps,col="red",main="Steps Per Day",xlab="Total Number of Steps Taken Per Day")
-dev.off()
+###What is mean total number of steps taken per day?
+##Tot number steps per day
+stepsSums <- aggregate(steps~date,data=data,sum)
+stepsSums
+##Histogram of number of steps per day
+hist(stepsSums$steps,col="red",main="Steps Per Day",xlab="Total Number of Steps Taken Per Day")
+##Calc and report mean and median of Tot number steps per day
+mean(stepsSums$steps)
+median(stepsSums$steps)
+
 
 --------------------------------------------------------
 
